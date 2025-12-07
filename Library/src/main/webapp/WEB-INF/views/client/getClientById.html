@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Client</title>
+</head>
+<body>
+
+<h2 th:text="${client.getFio()} + ', ' + ${client.getId()}"> name </h2>
+<div th:if="${!books.isEmpty()}">
+    <hr>
+    <h3>Книги:</h3>
+    <br>
+    <table th:each="book : ${books}">
+        <tr th:tel="${book.getTitle()} + ', ' + ${book.getAuthor()} + ',' ${book.getYear()}">book info</tr>
+    </table>
+</div>
+
+<div th:if="${books.isEmpty()}">
+    <p> Клиент не взял ни одной книги</p>
+</div>
+<hr>
+<form th:method="GET" th:action="@{/client/{id}/edit(id=${client.getId()})}">
+    <input type="submit" value="Редактировать">
+</form>
+<form th:method="DELETE" th:action="@{/client/{id}(id=${client.getId()})}">
+    <input type="submit" value="Удалить">
+</form>
+
+</body>
+</html>
